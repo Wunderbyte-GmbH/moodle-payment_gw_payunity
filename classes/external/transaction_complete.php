@@ -185,24 +185,10 @@ class transaction_complete extends external_api implements interface_transaction
             $status = '';
             $url = $serverurl;
             // SANDBOX OR PROD.
-            if ($sandbox == true) {
-                if ($orderdetails->result->code == '000.100.110') {
-                    // Approved.
-                    $status = 'success';
-                    $message = get_string('payment_successful', 'paygw_payunity');
-                } else {
-                    // Not Approved.
-                    $status = false;
-                }
-            } else {
-                if ($orderdetails->result->code == '000.000.000') {
-                    // Approved.
-                    $status = 'success';
-                    $message = get_string('payment_successful', 'paygw_payunity');
-                } else {
-                    // Not Approved.
-                    $status = false;
-                }
+            if (preg_match('/^(000\.000\.|000\.100\.1|000\.[36])/', $orderdetails->result->code) === 1) {
+                // Approved.
+                $status = 'success';
+                $message = get_string('payment_successful', 'paygw_payunity');
             }
 
             if ($status === 'success') {
