@@ -116,18 +116,6 @@ class transaction_complete extends external_api implements interface_transaction
             }
         }
 
-        // We need to prevent duplicates, so check if the payment already exists!
-        if ($DB->get_records('payments', [
-            'component' => 'local_shopping_cart',
-            'itemid' => $itemid,
-        ])) {
-            return [
-                'url' => $successurl ?? $serverurl,
-                'success' => true,
-                'message' => get_string('payment_alreadyexists', 'paygw_payunity'),
-            ];
-        }
-
         self::validate_parameters(self::execute_parameters(), [
             'component' => $component,
             'paymentarea' => $paymentarea,
@@ -162,23 +150,33 @@ class transaction_complete extends external_api implements interface_transaction
                 'itemid' => $itemid,
                 'userid' => $userid,
                 'gateway' => 'payunity',
-            ]) &&
-            ($orderdetails || $resourcepath === '')) {
+            ])) {
+            if ($orderdetails || $resourcepath === '') {
 
-            $code = $orderdetails->results->code ?? $orderdetails->result->code ?? '';
-            if ($code === '700.400.580'
-                || $code === '200.300.404'
-                || $resourcepath === '') {
-                // In this case we try to use internal id.
-                $payments = $payunityhelper->get_transaction_record($tid);
-                $orderdetails = $payments->payments[0] ?? null;
-                // Fallback for Fallback -> should never happen.
-                $code = $orderdetails->results ?? $orderdetails->result ?? null;
-                if ($code === '700.400.580' || $code === '200.300.404') {
-                    $payments = $payunityhelper->get_transaction_record_exetrnal_id($tid);
-                    $orderdetails = $payments->payments[0];
+                $code = $orderdetails->results->code ?? $orderdetails->result->code ?? '';
+                if ($code === '700.400.580'
+                    || $code === '200.300.404'
+                    || $resourcepath === '') {
+                    // In this case we try to use internal id.
+                    $payments = $payunityhelper->get_transaction_record($tid);
+                    $orderdetails = $payments->payments[0] ?? null;
+                    // Fallback for Fallback -> should never happen.
+                    $code = $orderdetails->results ?? $orderdetails->result ?? null;
+                    if ($code === '700.400.580' || $code === '200.300.404') {
+                        $payments = $payunityhelper->get_transaction_record_exetrnal_id($tid);
+                        $orderdetails = $payments->payments[0];
+                    }
                 }
+
             }
+        } else {
+
+            // We need to prevent duplicates, so check if the payment already exists!
+            return [
+                'url' => $successurl ?? $serverurl,
+                'success' => true,
+                'message' => get_string('payment_alreadyexists', 'paygw_payunity'),
+            ];
         }
 
         if ($orderdetails) {
