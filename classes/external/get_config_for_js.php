@@ -110,7 +110,7 @@ class get_config_for_js extends external_api {
         $payable = helper::get_payable($component, $paymentarea, $itemid);
         $surcharge = helper::get_gateway_surcharge('payunity');
 
-        $language = $SESSION->lang;
+        $language = current_language();
         $amount = number_format($payable->get_amount(), 2, '.', '');
         $currency = $payable->get_currency();
         $secret = $config['secret'];
