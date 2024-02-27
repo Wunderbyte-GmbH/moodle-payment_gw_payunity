@@ -50,11 +50,12 @@ Feature: PayUnity basic configuration and useage by user
     And I should see "30.30" in the ".core_payment_fee_breakdown" "css_element"
     And I press "Proceed"
     And I wait until the page is ready
+    And I wait "2" seconds
     ## The only way to deal with fields in the ifram is xpath 
-    And I set the field with xpath "//iframe[@name='card.number']" to "4111 1111 1111 1111"
-    And I set the field with xpath "//iframe[@name='card.cvv']" to "123"
     And I set the field with xpath "//input[contains(@class, 'wpwl-control-expiry')]" to "05/35"
     And I set the field with xpath "//input[contains(@class, 'wpwl-control-cardHolder')]" to "Behat Test"
+    And I set the field with xpath "//iframe[@name='card.number']" to "4111 1111 1111 1111"
+    And I set the field with xpath "//iframe[@name='card.cvv']" to "123"
     And I press "Pay now"
     And I wait until the page is ready
     And I should see "Payment successful!"
