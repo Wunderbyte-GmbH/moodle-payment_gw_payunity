@@ -84,8 +84,8 @@ class payunity_helper {
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                        "Authorization:Bearer {$this->secret}"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                        "Authorization:Bearer {$this->secret}"]);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $verify);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -109,8 +109,8 @@ class payunity_helper {
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                        "Authorization:Bearer {$this->secret}"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                        "Authorization:Bearer {$this->secret}"]);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $verify);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -134,8 +134,8 @@ class payunity_helper {
         }
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                        "Authorization:Bearer {$this->secret}"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                        "Authorization:Bearer {$this->secret}"]);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $verify);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

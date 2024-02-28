@@ -101,7 +101,7 @@ class transaction_complete extends external_api implements interface_transaction
                     // We need a hard stop. If for any reason we can't find out the userid, we log it and stop.
                     // We trigger the payment_error event.
                     $context = context_system::instance();
-                    $event = payment_error::create(array(
+                    $event = payment_error::create([
                         'context' => $context,
                         'userid' => $userid,
                         'other' => [
@@ -109,7 +109,7 @@ class transaction_complete extends external_api implements interface_transaction
                                 'orderid' => $tid,
                                 'itemid' => $itemid,
                                 'component' => $component,
-                                'paymentarea' => $paymentarea]));
+                                'paymentarea' => $paymentarea]]);
                     $event->trigger();
                     throw new \moodle_exception('nouseridintransactioncomplete', 'paygw_payunity');
                 }
@@ -261,34 +261,34 @@ class transaction_complete extends external_api implements interface_transaction
                                 'context' => $context,
                                 'userid' => $userid,
                                 'other' => [
-                                    'orderid' => $orderdetails->merchantTransactionId
-                                ]
+                                    'orderid' => $orderdetails->merchantTransactionId,
+                                ],
                             ]);
                             $event->trigger();
                         }
 
                         // We trigger the payment_successful event.
                         $context = context_system::instance();
-                        $event = payment_successful::create(array(
+                        $event = payment_successful::create([
                             'context' => $context,
                             'userid' => $userid,
                             'other' => [
                                 'message' => $message,
-                                'orderid' => $tid
-                            ]));
+                                'orderid' => $tid,
+                            ]]);
                         $event->trigger();
 
                         // If the delivery was not successful, we trigger an event.
                         if (!payment_helper::deliver_order($component, $paymentarea, $itemid, $paymentid, (int) $userid)) {
 
                             $context = context_system::instance();
-                            $event = delivery_error::create(array(
+                            $event = delivery_error::create([
                                 'context' => $context,
                                 'userid' => $userid,
                                 'other' => [
                                     'message' => $message,
                                     'orderid' => $tid,
-                                ]));
+                                ]]);
                             $event->trigger();
                         }
                     } catch (\Exception $e) {
@@ -320,7 +320,7 @@ class transaction_complete extends external_api implements interface_transaction
         if (!$success) {
             // We trigger the payment_error event.
             $context = context_system::instance();
-            $event = payment_error::create(array(
+            $event = payment_error::create([
                 'context' => $context,
                 'userid' => $userid,
                 'other' => [
@@ -328,7 +328,7 @@ class transaction_complete extends external_api implements interface_transaction
                         'orderid' => $tid,
                         'itemid' => $itemid,
                         'component' => $component,
-                        'paymentarea' => $paymentarea]));
+                        'paymentarea' => $paymentarea]]);
             $event->trigger();
         }
 

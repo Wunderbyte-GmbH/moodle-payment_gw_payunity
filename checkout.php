@@ -25,6 +25,8 @@ use paygw_payunity\output\checkout;
 
 require_once(__DIR__ . '/../../../config.php');
 
+require_login();
+
 global $DB, $PAGE, $OUTPUT, $USER;
 
 $resourcepath = required_param('resourcePath', PARAM_RAW);

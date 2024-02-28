@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-//use stdClass;
-
 /**
  * Class paygw_payunity_generator for generation of dummy data
  *
