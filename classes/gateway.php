@@ -27,10 +27,18 @@ namespace paygw_payunity;
 /**
  * The gateway class for PayPal payment gateway.
  *
+ * @package    paygw_payunity
  * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class gateway extends \core_payment\gateway {
+
+    /**
+     * Get supported currencies
+     *
+     * @return array
+     *
+     */
     public static function get_supported_currencies(): array {
         // See https://developer.paypal.com/docs/api/reference/currency-codes/,
         // 3-character ISO-4217: https://en.wikipedia.org/wiki/ISO_4217#Active_codes.

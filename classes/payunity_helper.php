@@ -17,7 +17,7 @@
 /**
  * Contains helper class to work with PayUnity REST API.
  *
- * @package    core_payment
+ * @package    paygw_payunity
  * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -30,6 +30,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/filelib.php');
 
+/**
+ * The helper class to work with PayUnity REST API.
+ *
+ * @package    paygw_payunity
+ * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class payunity_helper {
 
     /**
@@ -71,6 +78,14 @@ class payunity_helper {
         $this->baseurl = $sandbox ? 'https://eu-test.oppwa.com' : 'https://eu-prod.oppwa.com';
     }
 
+    /**
+     * Get order details
+     *
+     * @param string $resourcepath
+     *
+     * @return mixed
+     *
+     */
     public function get_order_details(string $resourcepath) {
 
         $url = $this->baseurl . $resourcepath;
@@ -97,6 +112,14 @@ class payunity_helper {
         return json_decode($responsedata);
     }
 
+    /**
+     * Get transaction record
+     *
+     * @param string $merchanttransactionid
+     *
+     * @return mixed
+     *
+     */
     public function get_transaction_record(string $merchanttransactionid) {
         $url = $this->baseurl . "/v1/query";
         $url .= "?entityId={$this->clientid}";
@@ -122,7 +145,14 @@ class payunity_helper {
         return json_decode($responsedata);
     }
 
-
+    /**
+     * Get transaction record exetrnal id
+     *
+     * @param string $purchaseid
+     *
+     * @return mixed
+     *
+     */
     public function get_transaction_record_exetrnal_id(string $purchaseid) {
         $url = $this->baseurl . "/v1/query/" . $purchaseid;
         $url .= "?entityId={$this->clientid}";

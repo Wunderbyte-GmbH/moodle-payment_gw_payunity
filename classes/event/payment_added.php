@@ -22,10 +22,11 @@
  * @author      Bernhard Fischer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace paygw_payunity\event;
 
 /**
- * The payment_added event.
+ * Class to handle the payment_added event.
  *
  * @package     paygw_payunity
  * @copyright   2023 Wunderbyte GmbH <info@wunderbyte.at>
@@ -34,21 +35,45 @@ namespace paygw_payunity\event;
  */
 class payment_added extends \core\event\base {
 
+    /**
+     * Event init
+     *
+     * @return void
+     *
+     */
     protected function init() {
         $this->data['crud'] = 'c';
         $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
         $this->data['objecttable'] = 'paygw_payunity_openorders';
     }
 
+    /**
+     * Get event name
+     *
+     * @return string
+     *
+     */
     public static function get_name() {
         return get_string('payment_added', 'paygw_payunity');
     }
 
+    /**
+     * Get event description
+     *
+     * @return string
+     *
+     */
     public function get_description() {
         return "The user with the id {$this->userid} has started a payment transaction (open order) with this orderid: " .
             $this->other['orderid'];
     }
 
+    /**
+     * Get event url
+     *
+     * @return \moodle_url
+     *
+     */
     public function get_url() {
         return new \moodle_url('/payment/gateway/payunity/checkout.php');
     }

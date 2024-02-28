@@ -17,7 +17,7 @@
 /**
  * This file contains the definition for the renderable classes for the booking instance
  *
- * @package   local_musi
+ * @package   paygw_payunity
  * @copyright 2021 Georg Maißer {@link http://www.wunderbyte.at}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -44,6 +44,13 @@ class checkout implements renderable, templatable {
 
     /**
      * In the Constructor, we gather all the data we need ans store it in the data property.
+     *
+     * @param mixed $orderid
+     * @param mixed $itemid
+     * @param mixed $paymentarea
+     * @param mixed $component
+     * @param mixed $resourcepath
+     *
      */
     public function __construct($orderid, $itemid, $paymentarea, $component, $resourcepath) {
 
@@ -56,6 +63,8 @@ class checkout implements renderable, templatable {
     }
 
     /**
+     * Export for template
+     *
      * @param renderer_base $output
      * @return array
      */

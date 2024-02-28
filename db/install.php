@@ -22,6 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+/**
+ * Xmldb paygw_payunity install.
+ *
+ * @return void
+ *
+ */
 function xmldb_paygw_payunity_install() {
     global $CFG;
 

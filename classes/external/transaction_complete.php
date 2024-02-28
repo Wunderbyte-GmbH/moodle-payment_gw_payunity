@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class contains a list of webservice functions related to the PayUnity payment gateway.
+ * A list of webservice functions related to the PayUnity payment gateway transactions.
  *
  * @package    paygw_payunity
  * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
@@ -48,6 +48,13 @@ if (!interface_exists(interface_transaction_complete::class)) {
     class_alias(pu_interface_transaction_complete::class, interface_transaction_complete::class);
 }
 
+/**
+ * This class contains a list of webservice functions related to the PayUnity payment gateway transactions.
+ *
+ * @package    paygw_payunity
+ * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class transaction_complete extends external_api implements interface_transaction_complete {
 
     /**

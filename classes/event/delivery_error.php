@@ -14,19 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * The payment_successful event.
  *
- * @package mod_booking
+ * @package paygw_payunity
  * @copyright 2014 David Bogner, http://www.edulabs.org
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace paygw_payunity\event;
 
 /**
  * The delivery_event class.
  *
+ * @package paygw_payunity
  * @property-read array $other { Extra information about event. }
  * @since Moodle 3.11
  * @copyright 2022 Georg Maißer <georg.maisser@wunderbyte.at>
@@ -34,20 +35,44 @@ namespace paygw_payunity\event;
  */
 class delivery_error extends \core\event\base {
 
+    /**
+     * Event init
+     *
+     * @return void
+     *
+     */
     protected function init() {
         $this->data['crud'] = 'c';
         $this->data['edulevel'] = self::LEVEL_PARTICIPATING;
     }
 
+    /**
+     * Get event name
+     *
+     * @return string
+     *
+     */
     public static function get_name() {
         return get_string('delivery_error', 'paygw_payunity');
     }
 
+    /**
+     * Get event description
+     *
+     * @return string
+     *
+     */
     public function get_description() {
         return "The user with the id {$this->userid} has tried to pay, but an error occured on delivery: "
             . $this->other['message'];
     }
 
+    /**
+     * Get event url
+     *
+     * @return \moodle_url
+     *
+     */
     public function get_url() {
         return new \moodle_url('/payment/gateway/payunity/checkout.php');
     }

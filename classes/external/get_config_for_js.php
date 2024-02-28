@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class contains a list of webservice functions related to the PayUnity payment gateway.
+ * A list of webservice functions related to the PayUnity payment gateway.
  *
  * @package    paygw_payunity
  * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
@@ -42,6 +42,13 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/externallib.php');
 
+/**
+ * This class contains a list of webservice functions related to the PayUnity payment gateway.
+ *
+ * @package    paygw_payunity
+ * @copyright  2022 Wunderbyte Gmbh <info@wunderbyte.at>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class get_config_for_js extends external_api {
 
     /**
@@ -57,6 +64,20 @@ class get_config_for_js extends external_api {
         ]);
     }
 
+    /**
+     * Performs curl request
+     *
+     * @param string $amount
+     * @param string $currency
+     * @param string $paymenttype
+     * @param string $secret
+     * @param string $entityid
+     * @param mixed $environment
+     * @param mixed $merchanttransactionid
+     *
+     * @return mixed
+     *
+     */
     public static function requestid(string $amount, string $currency, string $paymenttype, string $secret, string $entityid
     , $environment, $merchanttransactionid) {
         if ($environment === 'sandbox') {
