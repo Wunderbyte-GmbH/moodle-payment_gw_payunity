@@ -51,7 +51,7 @@ Feature: PayUnity basic configuration and useage by user
     And I press "Proceed"
     And I wait until the page is ready
     And I wait "2" seconds
-    ## The only way to deal with fields in the ifram is xpath 
+    ## The only way to deal with fields in the ifram is xpath
     And I set the field with xpath "//input[contains(@class, 'wpwl-control-expiry')]" to "05/35"
     And I set the field with xpath "//input[contains(@class, 'wpwl-control-cardHolder')]" to "Behat Test"
     And I set the field with xpath "//iframe[@name='card.number']" to "4111 1111 1111 1111"

@@ -94,6 +94,7 @@ export const process = (component, paymentArea, itemId, description) => {
                     ];
                     var localStrings = str.get_strings(strings);
                     $.when(localStrings).done(function(localizedEditStrings) {
+                        // eslint-disable-next-line promise/no-nesting
                         ModalFactory.create({
                             type: ModalFactory.types.CANCEL,
                             title: localizedEditStrings[0],
@@ -110,9 +111,9 @@ export const process = (component, paymentArea, itemId, description) => {
                             });
                             modal.show();
                             return '';
-                        }).catch({
+                        }).catch(function(error) {
                             // eslint-disable-next-line no-console
-                            // console.log(e);
+                            console.log(error);
                         });
                     });
 
