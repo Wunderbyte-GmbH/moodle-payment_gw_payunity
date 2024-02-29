@@ -153,8 +153,9 @@ jobs:
 
       - name: Behat features
         if: ${{ !cancelled() }}
-        # Envoke GitHub secret (works OK only on this level)
+        # Envoke GitHub secret credentials (works OK only on this level)
         env:
+          CLIENTID: ${{ secrets.CLIENTID }}
           PAYUNITY_SECRET: ${{ secrets.PAYUNITY_SECRET }}
         run: moodle-plugin-ci behat --profile chrome
 

@@ -75,10 +75,10 @@ class paygw_payunity_generator extends testing_module_generator {
 
         $config = new stdClass;
         $config->brandname = 'PayUnity';
-        $config->clientid = '8ac7a4c8742e842701742ffa2dea070d';
-        // Load the secret from Github.
-        $config->secret = getenv('PAYUNITY_SECRET');
         $config->environment = 'sandbox';
+        // Load the credentials from Github.
+        $config->clientid = getenv('CLIENTID');
+        $config->secret = getenv('PAYUNITY_SECRET');
 
         $record->config = json_encode($config);
 
