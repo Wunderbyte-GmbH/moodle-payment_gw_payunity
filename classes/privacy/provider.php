@@ -35,7 +35,6 @@ use core_privacy\local\request\writer;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider, paygw_provider {
-
     /**
      * Get the language string identifier with the component's language
      * file to explain why this plugin stores no data.
@@ -58,10 +57,9 @@ class provider implements \core_privacy\local\metadata\null_provider, paygw_prov
 
         $subcontext[] = get_string('gatewayname', 'paygw_payunity');
         $record = $DB->get_record('paygw_payunity', ['paymentid' => $payment->id]);
-        $orderid = $record->pp_orderid ?? $record->pu_orderid ?? 0;
 
         $data = (object) [
-            'orderid' => $orderid,
+            'orderid' => $record->pu_orderid ?? 0,
         ];
         writer::with_context($context)->export_data(
             $subcontext,
