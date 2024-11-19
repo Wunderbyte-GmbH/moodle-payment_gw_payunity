@@ -38,7 +38,6 @@ require_once($CFG->libdir . '/filelib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class payunity_helper {
-
     /**
      * @var string The base API URL
      */
@@ -60,7 +59,7 @@ class payunity_helper {
     private $token;
 
     /**
-     * @var boolean sandbox
+     * @var bool sandbox
      */
     private $sandbox;
 
