@@ -26,7 +26,8 @@
 import * as Repository from './repository';
 import Templates from 'core/templates';
 import Truncate from 'core/truncate';
-import ModalFactory from 'core/modal_factory';
+import Modal from 'core/modal';
+import CancelModal from 'core/modal_cancel';
 import ModalEvents from 'core/modal_events';
 import {get_string as getString} from 'core/str';
 
@@ -36,7 +37,7 @@ import {get_string as getString} from 'core/str';
  * @returns {Promise<Modal>}
  */
 const showModalWithPlaceholder = async() => {
-    const modal = await ModalFactory.create({
+    const modal = await Modal.create({
         body: await Templates.render('paygw_payunity/payunity_button_placeholder', {})
     });
     modal.show();
@@ -95,8 +96,7 @@ export const process = (component, paymentArea, itemId, description) => {
                     var localStrings = str.get_strings(strings);
                     $.when(localStrings).done(function(localizedEditStrings) {
                         // eslint-disable-next-line promise/no-nesting
-                        ModalFactory.create({
-                            type: ModalFactory.types.CANCEL,
+                        CancelModal.create({
                             title: localizedEditStrings[0],
                             body: localizedEditStrings[1],
                             buttons: {

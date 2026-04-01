@@ -22,7 +22,7 @@
  */
 
 import Ajax from 'core/ajax';
-import ModalFactory from 'core/modal_factory';
+import CancelModal from 'core/modal_cancel';
 import ModalEvents from 'core/modal_events';
 
 /**
@@ -77,8 +77,7 @@ export const init = (orderid,
                     var localStrings = str.get_strings(strings);
                     $.when(localStrings).done(function(localizedEditStrings) {
 
-                        ModalFactory.create({
-                            type: ModalFactory.types.CANCEL,
+                        CancelModal.create({
                             title: localizedEditStrings[0],
                             body: data.message,
                             buttons: {
